@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="http://s0.qhimg.com/common-zodiac/;css;reset-grids-comm-mini/03e160d1.css" />
+<link rel="stylesheet" href="http://s0.qhimg.com/cars-zodiac/;css;style/03ee6449.css" />
+<style>
+#mashead .mashead-bd #kw {
+margin-top: 4px;
+padding: 0 5px;
+width: 314px;
+height: 22px;
+line-height: 22px;
+font-size: 16px;
+outline: 0;
+border: 0;
+background: 0;
+}
+</style>
+</head>
+<body>
+<div id="doc" class="container24">
+	<div id="hd">
+		<!-- 主体头部模块 -->
+		<div id="mashead" class="span24 gmodule">
+			<div class="mashead-bd">
+				<form id="search" method="post" action="">
+					<div class="ipt-search"><input id="search-kw" type="text" autocomplete="off" x-webkit-speech /><b class="shadowtop"></b><b class="shadowleft"></b></div>
+					<button id="search-btn" class="btn-search" type="submit">汽车搜索</button>
+				</form>
+			</div>
+							
+			<div class="mashead-bd">
+				<form id="search2" method="post" action="">
+					<div class="ipt-search"><input id="kw" type="text" autocomplete="off" x-webkit-speech /><b class="shadowtop"></b><b class="shadowleft"></b></div>
+					<button id="search-btn" class="btn-search" type="submit">去哪儿搜索</button>
+				</form>
+			</div>
+		</div>	
+    </div>
+</div>    		
+<script src="http://s0.qhimg.com/lib/qwrap/111.js" type="text/javascript"></script>
+<script src="suggest.js"></script>
+ <script>
+    var installSuggest = function (){
+        var domName = W("#search-kw"),
+        configs = {
+            data_url : "http://unionsug.baidu.com/su?wd=%KEYWORD%",
+            get_data_fun : "remotejs",
+            item_hover_style : "hover",
+            item_selectors : "li",  
+            pos_adjust : {"left" : -1 ,"top" : 5 , "z-index" : 10},
+            auto_submit : true , 
+            auto_fix_list_pos : true ,
+            render_data_fun : function (nowWord , data){
+                var suggestHtml = [] , tmpName , tmpUrl ; 
+
+                for(var i = 0 ; i < data.length ; ++i) {
+                    tmpName = data[i].replace(nowWord , '<em>'+nowWord+'</em>'); 
+                    suggestHtml.push('<li><div class="sug-item">'+tmpName+'</div></li>');
+                } 
+
+                return suggestHtml.join("");
+            },
+            fill_data_fun : function (item){
+                var node = W(item) , 
+                sname = node.html().stripTags().trim();
+
+                domName.val(sname);
+            },
+            onaftergetdata : function (e){
+                e.rawdata = e.rawdata.s;
+            },
+            onaftersuggest : function (e){
+               console.info(this.getSuggestData());  
+            },
+            onbeforesuggest : function (e){
+               return true;
+            },
+            onbeforechoose : function (e){
+               console.info(e.selectedDom);    
+            },
+            onafterchoose : function (e){
+               console.info(e.selectedDom);    
+            },            
+        },
+		
+		domName2 = W("#kw"),
+
+        configs2 = {
+            data_url : "http://www.qunar.com/suggest/livesearch.jsp?lang=zh&q=%KEYWORD%&sa=true&callback=%callbackfun%",
+            get_data_fun : "jsonp",
+            item_hover_style : "hover",
+            item_selectors : "li",  
+           
+            pos_adjust : {"left" : -1 ,"top" : 5 , "z-index" : 10},
+            auto_submit : false , 
+            auto_fix_list_pos : true ,
+            render_data_fun : function (nowWord , data){
+                var suggestHtml = [] , tmpName , tmpUrl ; 
+
+                for(var i = 0 ; i < data.length ; ++i) {
+                    tmpName = data[i]["display"].replace(nowWord , '<em>'+nowWord+'</em>'); 
+                    suggestHtml.push('<li><div class="sug-item">'+tmpName+'</div></li>');
+                } 
+
+                return suggestHtml.join("");
+            },
+            fill_data_fun : function (item){
+                var node = W(item) , 
+                sname = node.html().stripTags().trim();
+
+                domName2.val(sname);
+            },
+            onaftergetdata : function (e){
+                e.rawdata = e.rawdata.result;
+				console.info(e.rawdata);
+            },
+            onaftersuggest : function (e){
+               console.info(this.getSuggestData());  
+            },
+            onbeforesuggest : function (e){
+               return true;
+            },
+            onbeforechoose : function (e){
+               console.info(e.selectedDom);    
+            },
+            onafterchoose : function (e){
+               console.info(e.selectedDom);    
+            },            
+        },
+        suggestCar = new Suggest( domName , configs), 
+		suggestQunar = new Suggest( domName2 , configs2);   
+    } ;
+    installSuggest();
+    W("#search").on("submit" , function (e){
+        W("#search").attr("action" , "http://www.cheyisou.com/qiche/" + encodeURIComponent(W("#search-kw").val().trim())); 
+    });   
+</script>
+</body>
+</html>

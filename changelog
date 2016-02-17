@@ -1,0 +1,43 @@
+﻿[version 0.4.6] 2014-06-26 
+1 data_provider_byword类型不必再指定url
+
+[version 0.4.5] 2013-09-01 
+1 增加get_data_fun中data_provider类型，可自主决定数据返回的方法。
+2 用JSON系方法解析json数据。如你使用低版本浏览器，需要适配JSON系的方法
+
+[version 0.4.3] 2013-04-16
+1 修复多个同位置suggest列表，后面的不能移位的bug (bug report ： 郭瑞)
+2 增加item_fake_class配置项，设置suggest列表中的不可选择项 (杨永乐)
+3 增加item_none_class配置项，设置无数据时，提示错误的类 (杨永乐)
+4 增加empty_prompt配置项，设置是否提示错误 (杨永乐)
+5 增加trim_KW配置项，设置是否自动移除关键字首尾的空格 (杨永乐)
+
+[version 0.4.2] 2012-11-29
+1 修复不设置suggestlist时dom重名的bug (bug report ： 杨永乐)
+2 增加了suggest中genDomId方法，用来生成唯一的dom id
+3 增加了jsonp方式调用的例子
+
+[version 0.4.0] 2012-08-31
+1 增加remmoteparam类型
+2 修复curIndex为零时收起的BUG
+
+[version 0.3.0] 2012-05-09
+1 使用mix重构方法
+2 修改部分职责不清的方法
+3 兼容原来的调用基础上，修改内部命名和实现，力求简洁
+4 解决auto_fix_list_pos在部分情况下设置为false依然调用列表位置的BUG
+5 解决window.resize时多次调用列表位置修正的BUG
+6 增加onaftergetdata,onbeforechoose,onafterchoose设置入口
+todo:1 为jq做适配 2 增加prefix_protected的实用性
+
+[version 0.2.0] 2012-04-28
+1 重构触发事件，完成第一次重构
+2 可以重新定义数据回显方法。
+3 增加自动调整列表位置的方法
+4 开始正式记录changelog
+
+[version 0.1.0] 2012-2-16 
+1 修复史前0.0.1重复绑定事件的bug 
+
+[version 0.0.1] 2011
+1 最初在360影视采用
